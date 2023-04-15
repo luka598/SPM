@@ -1,21 +1,64 @@
+#include <regex>
 #include <string>
 #include <vector>
-#include <vector>
-#include "tokens.hpp"
-#include "lexemes.hpp"
+#include <sstream>
+//#define NDEBUG
+#include <cassert>
+#include "buffer.hpp"
 #include "lexer.hpp"
-#include "tokenizer.hpp"
+#include "error.hpp"
 
-using namespace lang;
-namespace lang::lexer{
-	Lexer::Lexer(std::vector<tokenizer::Token> _tokens) : tokens(_tokens){
-		tokenize();
+namespace lang::lexer {
+	std::string Token::repr() const {
+		std::stringstream ss;
+		ss << "Token{ " << type << ", " << value << " }";
+		return ss.str();
 	};
 
-	void Lexer::tokenize(){
-		for (auto &t : tokens){
-			buffer.push_back(t);
-		}
+	Lexer::Lexer(std::string _source)
+		: success(true), error({""}), source(_source){
+		lex();
 	}
-};
+	
+	void Lexer::lex(){
+		size_t pos = 0;
+		while (pos < source.size()){	
+			bool found = false;
+			std::smatch match;
+			std::string source_substr = source.substr(pos);
+			for (auto token : TokenRegex){	
+				if (std::regex_search(source_substr, match, token.re)){
+					if (token.type != TokenType::IGNORE)
+						tokens.push_back(Token{token.type, match.str(0)});
+					pos += match.length(0);
+					assert(match.length(0) > 0 && "match.length(0) <= 0, There is error posibly in regex definitions");
+					found = true;
+					break;
+				}
+			}
+			if (!found){
+				std::stringstream ss;
+				ss << "Invalid token at position " << pos << ": " << source[pos];
+				throw std::runtime_error(ss.str());
+				success = false;
+				error = Error{ss.str()};
+				return;
+			}
+		}
+		return;
+	}
 
+	std::string Lexer::repr() const {
+		std::stringstream ss;
+		ss << "Lexer{ ";
+		for (auto token : tokens){
+			ss << token.repr() << " ";
+		}
+		ss << "}";
+		return ss.str();
+	};
+
+	std::ostream& operator<<(std::ostream& os, const Lexer& obj){	
+		return os << obj.repr();
+	}
+}

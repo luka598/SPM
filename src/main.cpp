@@ -1,14 +1,14 @@
+#include "lang/lexer.hpp"
+#include <ios>
 #include <iostream>
 #include <string>
-#include "lang/tokenizer.hpp"
-#include "lang/lexer.hpp"
 
 using namespace std;
 
 int main(){
-	string s = "dfjgh(){set(x) set(y) set(z 1)}\ndaklsjd()";
-	Tokenizer t(s);
-	cout << s << endl;
-	cout << t << endl;
+	cout << boolalpha;
+	string s = R"(print("Hello world"))";
+	auto lexer = lang::lexer::Lexer(s);
+	cout << lexer << " - " << lexer.success << " - " << lexer.error.message << endl; 
 	return 0;
 }

@@ -15,7 +15,7 @@ message(${PROJECT_NAME} ${SPM_VERSION})
 
 
 file(GLOB_RECURSE SRC
-     "src/*.h"
+     "src/*.hpp"
      "src/*.cpp"
 )
 message(${SRC})
