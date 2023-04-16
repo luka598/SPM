@@ -1,4 +1,5 @@
 #include "lang/lexer.hpp"
+#include "lang/parser.hpp"
 #include <ios>
 #include <iostream>
 #include <string>
@@ -10,5 +11,7 @@ int main(){
 	string s = R"(print("Hello world"))";
 	auto lexer = lang::lexer::Lexer(s);
 	cout << lexer << " - " << lexer.success << " - " << lexer.error.message << endl; 
+	auto parser = lang::parser::Parser(lexer.result);
+	// cout << parser << " - " << parser.success << " - " << parser.error.message << endl; 
 	return 0;
 }

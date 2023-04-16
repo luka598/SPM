@@ -36,7 +36,7 @@ namespace lang::lexer{
 
 	class Lexer {
 		public:
-			std::vector<Token> tokens;
+			std::vector<Token> result = {};
 			bool success;
 			Error error;
 			

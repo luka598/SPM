@@ -29,7 +29,7 @@ namespace lang::lexer {
 			for (auto token : TokenRegex){	
 				if (std::regex_search(source_substr, match, token.re)){
 					if (token.type != TokenType::IGNORE)
-						tokens.push_back(Token{token.type, match.str(0)});
+						result.push_back(Token{token.type, match.str(0)});
 					pos += match.length(0);
 					assert(match.length(0) > 0 && "match.length(0) <= 0, There is error posibly in regex definitions");
 					found = true;
@@ -51,7 +51,7 @@ namespace lang::lexer {
 	std::string Lexer::repr() const {
 		std::stringstream ss;
 		ss << "Lexer{ ";
-		for (auto token : tokens){
+		for (auto token : result){
 			ss << token.repr() << " ";
 		}
 		ss << "}";
