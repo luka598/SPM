@@ -1,6 +1,6 @@
 namespace lang::types {
-	enum Type{
-		INTEGER,
-		STRING,
-	};
+enum Type {
+  INTEGER,
+  STRING,
+};
 }
