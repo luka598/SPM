@@ -5,11 +5,9 @@
 #include <vector>
 
 namespace lang::parser {
-class Parser {
+class Parser : public ErrorBase{
 public:
   AST::BlockPtr result;
-  bool success;
-  Error error;
 
   Parser(std::vector<lexer::Token> _source);
   std::string repr() const;

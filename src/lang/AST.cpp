@@ -5,13 +5,17 @@ namespace lang::AST {
 // ---------------------
 // | Literal AST types |
 // ---------------------
-StringLiteral::StringLiteral(std::string _value) : value(_value) {}
+StringLiteral::StringLiteral(std::string _value) : value(_value) {
+	error << value.error;
+}
 std::string StringLiteral::repr() const {
   std::stringstream ss;
   ss << "StrinLiteral{ " << value << " }";
   return ss.str();
 }
-IntegerLiteral::IntegerLiteral(int _value) : value(_value) {}
+IntegerLiteral::IntegerLiteral(std::string _value) : value(_value) {
+	error << value.error;
+}
 std::string IntegerLiteral::repr() const {
   std::stringstream ss;
   ss << "IntegerLiteral{ " << value << " }";
@@ -49,10 +53,10 @@ std::string Block::repr() const {
       break;
     case NodeType::LITERAL:
       switch (node.as<LiteralBase>()->dataType()) {
-      case types::STRING:
+      case data::STRING:
         ss << node.as<StringLiteral>()->repr();
         break;
-      case types::INTEGER:
+      case data::INTEGER:
         ss << node.as<IntegerLiteral>()->repr();
         break;
       }

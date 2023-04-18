@@ -34,11 +34,9 @@ const std::vector<TokenRe> TokenRegex = {
     {TokenType::INTEGER, std::regex(R"#(^[0-9]+)#")},
 };
 
-class Lexer {
+class Lexer : public ErrorBase {
 public:
   std::vector<Token> result;
-  bool success;
-  Error error;
 
   Lexer(std::string _source);
   std::string repr() const;

@@ -1,9 +1,10 @@
+#include "error.hpp"
 #include <string>
 #include <vector>
 #define SMRT_DEBUG
 #include "smrt.hpp"
 
-#include "types.hpp"
+#include "data.hpp"
 
 #define PTR(x) using x##Ptr = smrt::Ptr<x>
 
@@ -18,7 +19,7 @@ enum NodeType {
 // -----------------
 // | Base AST node |
 // -----------------
-class Node : public smrt::Base {
+class Node : public smrt::Base, public ErrorBase {
 public:
   inline virtual NodeType type() = 0;
   virtual std::string repr() const = 0;
@@ -31,22 +32,22 @@ PTR(Node);
 class LiteralBase : public Node {
 public:
   NodeType type() override { return NodeType::LITERAL; }
-  virtual types::Type dataType() = 0;
+  virtual data::Type dataType() = 0;
 };
 PTR(LiteralBase);
 class StringLiteral : public LiteralBase {
 public:
-  types::Type dataType() override { return types::Type::STRING; };
-  std::string value;
+  data::Type dataType() override { return data::Type::STRING; };
+  data::String value;
   StringLiteral(std::string _value);
   std::string repr() const override;
 };
 PTR(StringLiteral);
 class IntegerLiteral : public LiteralBase {
 public:
-  types::Type dataType() override { return types::Type::INTEGER; };
-  int value;
-  IntegerLiteral(int _value);
+  data::Type dataType() override { return data::Type::INTEGER; };
+  data::Integer value;
+  IntegerLiteral(std::string _value);
   std::string repr() const override;
 };
 PTR(IntegerLiteral);
@@ -57,7 +58,7 @@ PTR(IntegerLiteral);
 class Identifier : public Node {
 public:
   NodeType type() override { return NodeType::IDENTIFIER; }
-  std::string value;
+  data::String value;
   Identifier(std::string _value);
   std::string repr() const override;
 };

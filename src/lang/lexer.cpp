@@ -16,7 +16,7 @@ std::string Token::repr() const {
 };
 
 Lexer::Lexer(std::string _source)
-    : success(true), error({""}), source(_source) {
+    : source(_source) {
   lex();
 }
 
@@ -40,9 +40,7 @@ void Lexer::lex() {
     if (!found) {
       std::stringstream ss;
       ss << "Invalid token at position " << pos << ": " << source[pos];
-      throw std::runtime_error(ss.str());
-      success = false;
-      error = Error{ss.str()};
+	  throwErr(ss.str()); 
       return;
     }
   }
