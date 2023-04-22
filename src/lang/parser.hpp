@@ -1,3 +1,4 @@
+#pragma once
 #include "AST.hpp"
 #include "buffer.hpp"
 #include "error.hpp"
@@ -5,7 +6,7 @@
 #include <vector>
 
 namespace lang::parser {
-class Parser : public ErrorBase{
+class Parser : public ErrorBase {
 public:
   AST::BlockPtr result;
 

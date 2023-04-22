@@ -12,7 +12,8 @@
 
 namespace lang::parser {
 Parser::Parser(std::vector<lexer::Token> _source)
-    : result(smrt::make<AST::Block>(std::vector<AST::NodePtr>())), source(_source) {
+    : result(smrt::make<AST::Block>(std::vector<AST::NodePtr>())),
+      source(_source) {
   parse();
 }
 
@@ -32,7 +33,7 @@ AST::NodePtr Parser::parse_identifier() {
     }
     default: {
       error << "Unexpected token at " << source.getIndex() << ": "
-         << source.at().repr();
+            << source.at().repr();
       return i.as<AST::Node>();
     }
     }
@@ -66,15 +67,15 @@ AST::NodePtr Parser::parse_block() {
       source.advance();
       break;
     case lexer::TokenType::INTEGER:
-      b->nodes.push_back(smrt::make_as<AST::Node, AST::IntegerLiteral>(
-          std::stoi(token.value)));
+      b->nodes.push_back(
+          smrt::make_as<AST::Node, AST::IntegerLiteral>(token.value));
       source.advance();
       break;
     default:;
     }
   }
   error << "Unclosed-block at position " << source.getIndex() << ": "
-     << source.at().repr();
+        << source.at().repr();
   return b.as<AST::Node>();
 }
 
@@ -95,7 +96,7 @@ void Parser::parse() {
       break;
     default:
       error << "Invalid token at position " << source.getIndex() << ": "
-         << source.at().repr();
+            << source.at().repr();
       return;
     }
   }

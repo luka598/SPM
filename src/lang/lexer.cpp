@@ -14,11 +14,7 @@ std::string Token::repr() const {
   ss << "Token{ " << type << ", " << value << " }";
   return ss.str();
 };
-
-Lexer::Lexer(std::string _source)
-    : source(_source) {
-  lex();
-}
+Lexer::Lexer(std::string _source) : source(_source) { lex(); }
 
 void Lexer::lex() {
   size_t pos = 0;
@@ -39,8 +35,7 @@ void Lexer::lex() {
     }
     if (!found) {
       std::stringstream ss;
-      ss << "Invalid token at position " << pos << ": " << source[pos];
-	  throwErr(ss.str()); 
+      error << "Invalid token at position " << pos << ": " << source[pos];
       return;
     }
   }

@@ -11,7 +11,8 @@
 //
 // 	Interpreter(AST::BlockPtr _source);
 // 	std::string repr() const;
-// 	friend std::ostream &operator<<(std::ostream &os, const Interpreter &obj);
+// 	friend std::ostream &operator<<(std::ostream &os, const Interpreter
+// &obj);
 //
 // private:
 // 	void interpret();
@@ -30,15 +31,19 @@
 // 	};
 //
 // 	// AST::BlockPtr Interpreter::interpret_block(AST::BlockPtr block){
-// 	// 	auto local_result = smrt::make<AST::Block>(std::vector<AST::NodePtr>());
+// 	// 	auto local_result =
+// smrt::make<AST::Block>(std::vector<AST::NodePtr>());
 // 	// 	for(auto node : block->nodes){
 // 	// 		switch(node->type()){
-// 	// 			case AST::NodeType::FCALL: 
+// 	// 			case AST::NodeType::FCALL:
 // 	// 				// Call function
-// 	// 				local_result->nodes.push_back(smrt::make_as<AST::Node, AST::IntegerLiteral>(0));
+// 	//
+// local_result->nodes.push_back(smrt::make_as<AST::Node,
+// AST::IntegerLiteral>(0));
 // 	// 				break;
 // 	// 			case AST::NodeType::BLOCK:
-// 	// 				local_result->nodes.push_back(interpret_block(node.as<AST::Block>()).as<AST::Node>());
+// 	//
+// local_result->nodes.push_back(interpret_block(node.as<AST::Block>()).as<AST::Node>());
 // 	// 				break;
 // 	// 			case AST::NodeType::IDENTIFIER:
 // 	// 				// Resolve identifier

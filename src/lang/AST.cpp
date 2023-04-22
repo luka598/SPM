@@ -5,17 +5,13 @@ namespace lang::AST {
 // ---------------------
 // | Literal AST types |
 // ---------------------
-StringLiteral::StringLiteral(std::string _value) : value(_value) {
-	error << value.error;
-}
+StringLiteral::StringLiteral(std::string _value) : value(_value) {}
 std::string StringLiteral::repr() const {
   std::stringstream ss;
   ss << "StrinLiteral{ " << value << " }";
   return ss.str();
 }
-IntegerLiteral::IntegerLiteral(std::string _value) : value(_value) {
-	error << value.error;
-}
+IntegerLiteral::IntegerLiteral(std::string _value) : value(_value) {}
 std::string IntegerLiteral::repr() const {
   std::stringstream ss;
   ss << "IntegerLiteral{ " << value << " }";

@@ -11,8 +11,7 @@ int main() {
   cout << boolalpha;
   string s = R"(print("Hello world"))";
   auto lexer = lang::lexer::Lexer(s);
-  cout << lexer << " - " << lexer.success << " - " << lexer.error.message
-       << endl;
+  cout << lexer << " - " << lexer.error << endl;
   auto parser = lang::parser::Parser(lexer.result);
   cout << parser;
   return 0;

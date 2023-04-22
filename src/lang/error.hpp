@@ -5,27 +5,32 @@
 // #define ERROR_FATAL // Throws runtime error when error is raised
 
 namespace lang {
-	class END;
+class END;
 
-	class Error {
-		public:
-			bool thrown = false;
-			
-			std::string message() const;
-			operator bool() const;
-			template<typename T>
-				friend Error & operator<<(Error &obj, const T &value);
-			friend Error & operator<<(Error &obj, const END &_);
-			friend Error & operator<<(Error &obj, const Error &e);
-			friend std::ostream & operator<<(std::ostream &os, const Error &obj);
-			Error();
+class Error {
+public:
+  bool thrown = false;
 
-		private:
-			std::stringstream ss;
-	};
+  std::string message() const;
+  operator bool() const;
+  template <typename T> friend Error &operator<<(Error &obj, const T &value);
+  friend Error &operator<<(Error &obj, const END &_);
+  friend Error &operator<<(Error &obj, const Error &e);
+  friend std::ostream &operator<<(std::ostream &os, const Error &obj);
+  Error();
 
-	class ErrorBase {
-		public:
-			Error error;
-	};
+private:
+  std::stringstream ss;
+};
+
+template <typename T> Error &operator<<(Error &obj, const T &value) {
+  obj.thrown = true;
+  obj.ss << value;
+  return obj;
+}
+
+class ErrorBase {
+public:
+  Error error;
+};
 } // namespace lang

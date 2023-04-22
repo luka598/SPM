@@ -38,7 +38,7 @@ PTR(LiteralBase);
 class StringLiteral : public LiteralBase {
 public:
   data::Type dataType() override { return data::Type::STRING; };
-  data::String value;
+  std::string value;
   StringLiteral(std::string _value);
   std::string repr() const override;
 };
@@ -46,7 +46,7 @@ PTR(StringLiteral);
 class IntegerLiteral : public LiteralBase {
 public:
   data::Type dataType() override { return data::Type::INTEGER; };
-  data::Integer value;
+  std::string value;
   IntegerLiteral(std::string _value);
   std::string repr() const override;
 };
@@ -58,7 +58,7 @@ PTR(IntegerLiteral);
 class Identifier : public Node {
 public:
   NodeType type() override { return NodeType::IDENTIFIER; }
-  data::String value;
+  std::string value;
   Identifier(std::string _value);
   std::string repr() const override;
 };
