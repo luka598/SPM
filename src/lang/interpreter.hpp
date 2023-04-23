@@ -1,6 +1,7 @@
 #include "AST.hpp"
 #include "error.hpp"
-#include <map>
+#include "data.hpp"
+#include <unordered_map>
 #include <vector>
 
 namespace lang::interpreter {
@@ -17,10 +18,7 @@ public:
 private:
   AST::BlockPtr interpret_block(AST::BlockPtr block);
   void interpret();
-  inline void eval() { return interpret(); };
-  // TODO: this should map either AST::Identifier to AST::Literal
-  // or as I would prefer it type::String to type::*
-  std::map<std::string, AST::LiteralBasePtr> vars;
+  std::unordered_map<std::string, data::DataPtr> vars;
   AST::BlockPtr source;
 };
 } // namespace lang::interpreter

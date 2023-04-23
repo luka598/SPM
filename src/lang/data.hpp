@@ -1,6 +1,8 @@
+#pragma once
 #include "error.hpp"
 #include "smrt.hpp"
 #include <string>
+#include <functional>
 
 #define PTR(x) using x##Ptr = smrt::Ptr<x>
 
@@ -33,4 +35,5 @@ public:
   String(std::string _value);
 };
 PTR(String);
+
 } // namespace lang::data
