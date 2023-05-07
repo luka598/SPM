@@ -19,10 +19,10 @@ file(GLOB_RECURSE SRC
      "src/*.cpp"
 )
 message(${SRC})
-configure_file(src/config.hpp.in config.hpp)
 add_executable(${PROJECT_NAME}
 	# src/main.cpp
 	${SRC}
 )
 target_link_libraries(${PROJECT_NAME}
 )
+target_include_directories(${PROJECT_NAME} PRIVATE src)
