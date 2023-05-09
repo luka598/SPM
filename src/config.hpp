@@ -19,5 +19,5 @@ namespace SPM::config{
         std::vector<Dependency> Dependencies;
     };
     
-    Config readConfig();
+    Config readConfigFile(std::string file);
 }
