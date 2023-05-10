@@ -4,22 +4,19 @@
 
 namespace SPM::Log{
     enum LogLevel{
-                INFO,
-                WARN,
-                ERROR,
-            };
+        INFO,
+        WARN,
+        ERROR,
+    };
 
     class Logger {
         public:
-            
-            
+           template <typename T>
+                friend Logger & operator<<(Logger &l, T &t){
+                    l.message << t;
+                    return l;
+                }
 
-            template <typename T>
-            friend Logger & operator<<(Logger &l, T &t){
-                l.message << t;
-                return l;
-            }
-            
             friend Logger & operator<<(Logger &l, LogLevel ll){
                 std::stringstream out;
                 out << "[" << __func__ << "@" << __FILE__ << ":" << __LINE__ << "] ";

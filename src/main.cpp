@@ -23,6 +23,7 @@ int main(int argc, char** argv)
  //        return 1;
  //    }
 	//
-   SPM::config::readConfigFile("SPM.toml");
+  SPM::config::Config conf =  SPM::config::readConfigFile("SPM.toml");
+  std::cout << conf << std::endl;
    return 0;
 }

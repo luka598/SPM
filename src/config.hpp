@@ -1,3 +1,4 @@
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -8,16 +9,17 @@ namespace SPM::config{
         std::string version;
     };
 
-    struct Package {
+    struct Project {
         std::string name;
         std::string version;
-        // std::vector<Dependency> dependecies;
+        std::vector<Dependency> dependecies;
     };
 
     struct Config {
-        Package package;
-        std::vector<Dependency> Dependencies;
+        Project project;
     };
-    
+
+    std::ostream& operator<<(std::ostream& os, const Config &conf);
+
     Config readConfigFile(std::string file);
 }

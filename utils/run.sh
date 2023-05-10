@@ -1,4 +1,5 @@
 set -x
 set -e
 
-./build/SPM
+cd build
+./SPM
