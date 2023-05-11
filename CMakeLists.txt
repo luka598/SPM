@@ -13,6 +13,22 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 project(SPM VERSION 1.0.0.0 LANGUAGES CXX)
 message(${PROJECT_NAME} ${SPM_VERSION})
 
+include(FetchContent)
+
+FetchContent_Declare(
+                    cpr
+                    GIT_REPOSITORY https://github.com/libcpr/cpr.git
+                    GIT_TAG 32fd1453194c37d5136577ee55629b863a42333f
+)
+FetchContent_MakeAvailable(cpr)
+
+FetchContent_Declare(
+    tomlplusplus
+    GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
+    GIT_TAG        v3.3.0
+)
+FetchContent_MakeAvailable(tomlplusplus)
+
 
 file(GLOB_RECURSE SRC
      "src/*.hpp"
@@ -24,5 +40,7 @@ add_executable(${PROJECT_NAME}
 	${SRC}
 )
 target_link_libraries(${PROJECT_NAME}
+    PUBLIC cpr::cpr
+    PUBLIC tomlplusplus::tomlplusplus
 )
 target_include_directories(${PROJECT_NAME} PRIVATE src)

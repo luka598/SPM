@@ -2,7 +2,7 @@
 #include <optional>
 
 #define TOML_EXCEPTIONS 0
-#include <external/toml.hpp>
+#include <toml++/toml.h>
 #include <log.hpp>
 #include <string>
 #include <vector>
